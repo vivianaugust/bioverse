@@ -16,8 +16,8 @@ def requirements_list() -> list[str]:
 
 setup(
     name = "bioverse",
-    version="1.1.5",
-    author = "Alex Bixel",
+    version="1.1.6",
+    author = "viv",
     author_email = "d.alex.bixel@gmail.com",
     description = ("A simulation framework to assess the statistical power of future biosignature surveys"),
     url = "https://github.com/danielapai/bioverse",
