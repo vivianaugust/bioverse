@@ -1,0 +1,28 @@
+TransitSurvey with the following parameters:
+  label: default
+  diameter: 50.0
+  t_max: 3652.5
+  t_slew: 0.0208
+  T_st_ref: 3300.0
+  R_st_ref: 0.315
+  D_ref: 50.0
+  d_ref: 50.0
+  N_obs_max: 1000
+  mode: transit
+
+Conducts the following measurements
+(0) Measures parameter 'L_st'
+(1) Measures parameter 'R_st' with 5% precision
+(2) Measures parameter 'M_st' with 5% precision
+(3) Measures parameter 'T_eff_st' with 25.0 precision
+(4) Measures parameter 'd'
+(5) Measures parameter 'H'
+(6) Measures parameter 'age' with 30% precision
+(7) Measures parameter 'depth'
+(8) Measures parameter 'T_dur'
+(9) Measures parameter 'P' with 0.001 precision
+(10) Measures parameter 'has_H2O'
+    Average time required: 7.5 d
+(11) Measures parameter 'EEC'
+(12) Measures parameter 'has_O2'
+    Average time required: 3.1 d
