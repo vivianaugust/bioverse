@@ -45,10 +45,3 @@ jobs:
         pip install pytest pytest-cov
         # Run tests and generate coverage report
         pytest --cov=bioverse --cov-report=xml tests/
-
-    # Optional: Upload coverage report to services like Codecov or Coveralls
-    - name: Upload coverage to Codecov (example)
-      uses: codecov/codecov-action@v4
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }} # Set this secret in GitHub
-        fail_ci_if_error: true # Ensure the CI fails if the report upload fails
