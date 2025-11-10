@@ -1,0 +1,54 @@
+name: Python CI/CD
+
+# Controls when the action will run.
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel.
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Test across the Python versions indicated in __pycache__
+        python-version: ["3.11", "3.12", "3.13"]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip' # Cache dependencies
+
+    - name: Install dependencies
+      # Install dependencies from requirements.txt and any setup file extras
+      run: |
+        python -m pip install --upgrade pip
+        # Install testing dependencies (assuming they are in requirements.txt or setup.py)
+        # You may need to replace '.[dev]' with '.[test]' or similar if your setup.py defines extras
+        pip install -r requirements.txt
+        pip install .
+        
+    - name: Run Pytest Tests
+      # The tests are located in the 'tests' directory
+      # The 'bioverse' package needs to be installed first for the tests to import it
+      run: |
+        # Install pytest explicitly if not in requirements.txt
+        pip install pytest pytest-cov
+        # Run tests and generate coverage report
+        pytest --cov=bioverse --cov-report=xml tests/
+
+    # Optional: Upload coverage report to services like Codecov or Coveralls
+    - name: Upload coverage to Codecov (example)
+      uses: codecov/codecov-action@v4
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }} # Set this secret in GitHub
+        fail_ci_if_error: true # Ensure the CI fails if the report upload fails
